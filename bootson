@@ -1,0 +1,20 @@
+#!/bin/bash
+
+./sshkey
+./apt-s3
+./ros
+./github
+
+# Check if the ~/Downloads/ directory exists
+if [ -d ~/Downloads/ ]; then
+    # If it exists, change to it
+    cd ~/Downloads/
+else
+    # If it doesn't exist, create it and then change to it
+    mkdir -p ~/Downloads/
+    cd ~/Downloads/
+fi
+
+git clone >gitlink<
+
+sudo ./Downloads/robohustler/dpkg -i robohustler.deb

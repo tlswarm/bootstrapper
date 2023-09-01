@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Display the statement
+echo "ONLY PROCEED if you have your Access Key ID, Secret Access Key, Region, and Output Format."
+
+# Ask if the user wants to proceed or exit
+read -p "Do you want to proceed? (proceed/exit): " proceed_input
+
+if [ "$proceed_input" == "proceed" ]; then
+    # Install necessary packages and configure AWS CLI
+    sudo apt install -y ca-certificates apt-transport-https
+    echo "deb https://apt.swarmfarm.com focal main" | sudo tee /etc/apt/sources.list.d/swarmfarm.list
+    curl https://apt.swarmfarm.com/pubkey.gpg | sudo apt-key add -
+    sudo apt update
+    sudo apt install -y awscli
+elif [ "$proceed_input" == "exit" ]; then
+    echo "Exiting. AWS configuration not completed."
+else
+    echo "Invalid input. Please type 'proceed' or 'exit'."
+fi
+
+sudo apt install swarmfarm-swarmbot-ssh-client
+
+sudo apt install swarmfarm-auth-login
+
+sudo apt install swarmfarm-attachment-aliases
+
+sudo apt install swarmfarm-can-log-tools
+
