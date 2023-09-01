@@ -1,20 +1,49 @@
 #!/bin/bash
 
-./sshkey
-./apt-s3
-./ros
-./github
+#!/bin/bash
 
-# Check if the ~/Downloads/ directory exists
-if [ -d ~/Downloads/ ]; then
-    # If it exists, change to it
-    cd ~/Downloads/
+ready=false;
+
+# Display the instructions
+echo "This script helps you set up your WSL environment in a standard way for success."
+echo "DO NOT type 'proceed' and press Enter unless you are confident in each step."
+echo "Your first requirement is to go to https://id.swarmfarm.com/manage-profile/security"
+echo "to create and download your SSH keys. Once complete, proceed."
+
+# Ask if the user is ready to proceed or wants to quit
+read -p "Are you ready to proceed or do you want to quit? (proceed/exit): " user_input
+
+# Check the user's input
+if [ "$user_input" == "proceed" ]; then
+    echo "Continuing with the script..."
+    while(!ready){
+    # Specify the Windows Downloads directory path
+    windows_home_dir=$(find /mnt/c/Users/* -maxdepth 0 -type d -not \( -name "All Users" -o -name "Default" -o -name "Default User" -o -name "Public" \) -exec basename {} \;)
+    windows_downloads="/mnt/c/Users/$windows_home_dir/Downloads"  # Adjust the path as needed
+
+    # Check if the id_25519 and id_25519.pub files exist
+    if [ -f "$windows_downloads/id_25519" ] && [ -f "$windows_downloads/id_25519.pub" ]; then
+        echo "Files 'id_25519' and 'id_25519.pub' exist in $windows_downloads."
+        echo "You can proceed with the next steps."
+        ready=true;
+    else
+        echo "You have not completed the previous step correctly. You cannot proceed."
+    fi
+    }
+    ./sshkey
+    ./apt-s3
+    ./ros
+    ./github
+
+    cd /tmp/
+
+    git clone git@github.com:tlswarm/robohustler.git
+
+    sudo ./robohustler/dpkg -i robohustler.deb
+
+elif [ "$user_input" == "exit" ]; then
+    echo "Exiting the script."
 else
-    # If it doesn't exist, create it and then change to it
-    mkdir -p ~/Downloads/
-    cd ~/Downloads/
+    echo "Invalid input. Please type 'proceed' or 'exit' to continue or quit."
 fi
 
-git clone >gitlink<
-
-sudo ./Downloads/robohustler/dpkg -i robohustler.deb
