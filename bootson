@@ -13,23 +13,6 @@ echo "to create and download your SSH keys. Once complete, proceed."
 # Ask if the user is ready to proceed or wants to quit
 read -p "Are you ready to proceed or do you want to quit? (proceed/exit): " user_input
 
-# Check the user's input
-if [ "$user_input" == "proceed" ]; then
-    echo "Continuing with the script..."
-    while(!ready){
-    # Specify the Windows Downloads directory path
-    windows_home_dir=$(find /mnt/c/Users/* -maxdepth 0 -type d -not \( -name "All Users" -o -name "Default" -o -name "Default User" -o -name "Public" \) -exec basename {} \;)
-    windows_downloads="/mnt/c/Users/$windows_home_dir/Downloads"  # Adjust the path as needed
-
-    # Check if the id_25519 and id_25519.pub files exist
-    if [ -f "$windows_downloads/id_25519" ] && [ -f "$windows_downloads/id_25519.pub" ]; then
-        echo "Files 'id_25519' and 'id_25519.pub' exist in $windows_downloads."
-        echo "You can proceed with the next steps."
-        ready=true;
-    else
-        echo "You have not completed the previous step correctly. You cannot proceed."
-    fi
-    }
     ./sshkey
     ./apt-s3
     ./ros
@@ -39,11 +22,7 @@ if [ "$user_input" == "proceed" ]; then
 
     git clone git@github.com:tlswarm/robohustler.git
 
-    sudo ./robohustler/dpkg -i robohustler.deb
+    sudo dpkg -i /tmp/robohustler/robohustler.deb
 
-elif [ "$user_input" == "exit" ]; then
-    echo "Exiting the script."
-else
-    echo "Invalid input. Please type 'proceed' or 'exit' to continue or quit."
-fi
+
 
