@@ -19,4 +19,5 @@ read -p "Are you ready to proceed or do you want to quit? (proceed/exit): " user
 ./github
 
 cd /tmp/
+
 git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && cd && sudo rm -r /tmp/bootstrapper/ /tmp/robohustler/
