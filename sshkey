@@ -12,3 +12,6 @@ chmod 600 "$ubuntu_ssh_folder/id_ed25519"
 if ! grep -Fxq "ControlMaster auto" ~/.ssh/config; then echo "ControlMaster auto" >> ~/.ssh/config; fi; if ! grep -Fxq "ControlPath ~/.ssh/%r@%h:%p" ~/.ssh/config; then echo "ControlPath ~/.ssh/%r@%h:%p" >> ~/.ssh/config; fi;
 
 sudo shutdown
+
+cd /tmp/
+git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb
