@@ -1,23 +1,27 @@
 #!/bin/bash
 
-#!/bin/bash
+windows_home_dir=$(find /mnt/c/Users/* -maxdepth 0 -type d -not \( -name "All Users" -o -name "Default" -o -name "Default User" -o -name "Public" \) -exec basename {} \;)
+windows_downloads="/mnt/c/Users/$windows_home_dir/Downloads"
+ubuntu_ssh_folder="$HOME/.ssh"
 
-ready=false;
+# Check if the required files exist
+if [ ! -e "$windows_downloads/id_ed25519" ] || [ ! -e "$windows_downloads/id_ed25519.pub" ]; then
+  echo "You haven't downloaded your SSH keys. Please go to https://id.swarmfarm.com/manage-profile/security to do this first. Exiting."
+  exit 1
+fi
+
+# Copy the SSH keys if they exist
+cp "$windows_downloads/id_ed25519" "$ubuntu_ssh_folder/"
+cp "$windows_downloads/id_ed25519.pub" "$ubuntu_ssh_folder/"
 
 # Display the instructions
 echo "This script helps you set up your WSL environment in a standard way for success."
 echo "DO NOT type 'proceed' and press Enter unless you are confident in each step."
-echo "Your first requirement is to go to https://id.swarmfarm.com/manage-profile/security"
-echo "to create and download your SSH keys. Once complete, proceed."
-
-# Ask if the user is ready to proceed or wants to quit
 read -p "Are you ready to proceed or do you want to quit? (proceed/exit): " user_input
 
 ./sshkey
 ./apt-s3
 ./ros
-./github
+./github 
 
-cd /tmp/
-
-git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && cd && sudo rm -r /tmp/bootstrapper/ /tmp/robohustler/
+cd /tmp/ && git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && cd && sudo /tmp/robohustler/ && rm -r /tmp/bootstrapper/ 
