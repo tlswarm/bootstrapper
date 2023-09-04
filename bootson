@@ -22,6 +22,6 @@ read -p "Are you ready to proceed or do you want to quit? (proceed/exit): " user
 ./sshkey
 ./apt-s3
 ./ros
-./github 
+./github && sudo apt install -y swarmfarm-route-analyser
 
 cd /tmp/ && git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && cd && sudo /tmp/robohustler/ && rm -r /tmp/bootstrapper/ 
