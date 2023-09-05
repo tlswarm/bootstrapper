@@ -22,8 +22,12 @@ while true; do
 done
 
 ./apt-s3
-./tools
+./sftools
 ./ros
+
+if [ -d "/tmp/robohustler/" ]; then
+        sudo rm -r "/tmp/robohustler/"
+    fi
 
 cd /tmp/ && git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && 
 
@@ -31,6 +35,8 @@ if [ -d "/tmp/robohustler/" ]; then
         sudo rm -r "/tmp/robohustler/"
     fi
 
-if [ -d "/tmp/bootstrapper/" ]; then
-        sudo rm -r "/tmp/bootstrapper/"
+if [ -d /tmp/bootstrapper/ ]; then
+        sudo rm -r /tmp/bootstrapper/
     fi
+
+exit
