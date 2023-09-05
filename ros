@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
 sudo apt install -y curl 
@@ -5,10 +6,9 @@ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo ap
 
 sudo apt update
 
-#!/bin/bash
 
-# Display a warning message
-echo "Warning: This process will take approximately 30 minutes to complete."
+echo "You are about to install ROS."
+echo "This process will take approximately 30 minutes to complete with good internet."
 echo "Please ensure you have enough time to proceed."
 
 # Wait for the user to press Enter
