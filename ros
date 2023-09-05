@@ -12,7 +12,20 @@ echo "This process will take approximately 30 minutes to complete with good inte
 echo "Please ensure you have enough time to proceed."
 
 # Wait for the user to press Enter
-read -p "Press Enter when ready to continue..."
+while true; do
+  read -p "(proceed/exit): " user_input
+  # Convert user input to lowercase for case-insensitive comparison
+  user_input_lc=$(echo "$user_input" | tr '[:upper:]' '[:lower:]')
+  if [ "$user_input_lc" == "proceed" ]; then
+    echo "Continuing..."
+    break
+  elif [ "$user_input_lc" == "exit" ]; then
+    echo "Exiting..."
+    exit 1
+  else
+    echo "Invalid input. Please type 'proceed' or 'exit'."
+  fi
+done
 
 # The script will continue after the user presses Enter
 echo "Continuing with the process..."
