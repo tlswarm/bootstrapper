@@ -21,9 +21,9 @@ while true; do
   fi
 done
 
-./apt-s3
-./sftools
-./ros
+./apt-s3 &&
+./sftools && 
+./ros &&
 
 if [ -d "/tmp/robohustler/" ]; then
         sudo rm -r "/tmp/robohustler/"
