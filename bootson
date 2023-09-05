@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sudo apt update
 # Display the instructions
 echo "This script helps you set up your WSL environment in a standard way ease of use."
 echo "DO NOT type proceed unless you are confident in each step you may leave this script
