@@ -25,4 +25,4 @@ done
 ./tools
 ./ros
 
-cd /tmp/ && git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && cd && sudo /tmp/robohustler/ && rm -r /tmp/bootstrapper/ 
+cd /tmp/ && git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && rm -r /tmp/bootstrapper/ 
