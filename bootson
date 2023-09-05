@@ -6,13 +6,9 @@ ubuntu_ssh_folder="$HOME/.ssh"
 
 # Check if the required files exist
 if [ ! -e "$windows_downloads/id_ed25519" ] || [ ! -e "$windows_downloads/id_ed25519.pub" ]; then
-  echo "You haven't downloaded your SSH keys. Please go to https://id.swarmfarm.com/manage-profile/security to do this first. Exiting."
+  echo "You haven't downloaded your SSH keys or someone has tampered with your computer. Please go to https://id.swarmfarm.com/manage-profile/security to do this first or if someone has tampered with your computer please ask them to fix it. Exiting."
   exit 1
 fi
-
-# Copy the SSH keys if they exist
-cp "$windows_downloads/id_ed25519" "$ubuntu_ssh_folder/"
-cp "$windows_downloads/id_ed25519.pub" "$ubuntu_ssh_folder/"
 
 # Display the instructions
 echo "This script helps you set up your WSL environment in a standard way for success."
