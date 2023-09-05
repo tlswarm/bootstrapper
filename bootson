@@ -4,20 +4,41 @@ windows_home_dir=$(find /mnt/c/Users/* -maxdepth 0 -type d -not \( -name "All Us
 windows_downloads="/mnt/c/Users/$windows_home_dir/Downloads"
 ubuntu_ssh_folder="$HOME/.ssh"
 
-# Check if the required files exist
-if [ ! -e "$windows_downloads/id_ed25519" ] || [ ! -e "$windows_downloads/id_ed25519.pub" ]; then
-  echo "You haven't downloaded your SSH keys or someone has tampered with your computer. Please go to https://id.swarmfarm.com/manage-profile/security to do this first or if someone has tampered with your computer please ask them to fix it. Exiting."
-  exit 1
-fi
+#!/bin/bash
+
+# ...
+
+# Check if the required files exist in a loop
+while true; do
+  if [ ! -e "$windows_downloads/id_ed25519" ] || [ ! -e "$windows_downloads/id_ed25519.pub" ]; then
+    echo "You haven't downloaded your SSH keys or someone has tampered with your computer."
+    echo "Please go to https://id.swarmfarm.com/manage-profile/security to do this first."
+    echo "If someone has tampered with your computer, please ask them to fix it. Exiting."
+
+    # Prompt the user for input
+    read -p "Type 'exit' to exit, or press Enter to retry: " user_input
+
+    # Check if the user wants to exit or retry
+    if [ "$user_input" == "exit" ]; then
+      exit 1
+    else
+      continue  # Retry the check
+    fi
+  else
+    break  # Files exist, exit the loop
+  fi
+done
 
 # Display the instructions
 echo "This script helps you set up your WSL environment in a standard way for success."
-echo "DO NOT type 'proceed' and press Enter unless you are confident in each step."
+echo "DO NOT type 'proceed' and press Enter unless you are confident in each step you may leave this script running while you complete any incomplete steps
+just dont skip any or do them out of order."
 read -p "Are you ready to proceed or do you want to quit? (proceed/exit): " user_input
 
 ./sshkey
 ./apt-s3
+./tools
 ./ros
-./github && sudo apt install -y swarmfarm-route-analyser
+./github
 
 cd /tmp/ && git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && cd && sudo /tmp/robohustler/ && rm -r /tmp/bootstrapper/ 

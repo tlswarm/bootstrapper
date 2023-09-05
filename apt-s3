@@ -1,11 +1,21 @@
 #!/bin/bash
 
-# Display the statement
-echo "ONLY PROCEED if you have your Access Key ID, Secret Access Key, Region, and Output Format - you will have to get these from a swarmfarm aws admin."
-
-# Ask if the user wants to proceed or exit
-read -p "Do you want to proceed? press enter"
-
+# Prompt the user to type "proceed" or "exit"
+while true; do
+  read -p "ONLY PROCEED if you have your Access Key ID, Secret Access Key - you will have to get these from a swarmfarm aws admin.
+   Type proceed and press enter to continue: " user_input
+  # Convert user input to lowercase for case-insensitive comparison
+  user_input_lc=$(echo "$user_input" | tr '[:upper:]' '[:lower:]')
+  if [ "$user_input_lc" == "proceed" ]; then
+    echo "Continuing..."
+    break
+  elif [ "$user_input_lc" == "exit" ]; then
+    echo "Exiting..."
+    exit 1
+  else
+    echo "Invalid input. Please type 'proceed' or 'exit'."
+  fi
+done
 
     # Install necessary packages and configure AWS CLI
     sudo apt install -y ca-certificates apt-transport-https
@@ -14,17 +24,32 @@ read -p "Do you want to proceed? press enter"
     sudo apt update
     sudo apt install -y awscli
 
-read -p "You are about to configure aws-cli on your computer if you stuff this up just run aws-configure and enter the correct details"
+read -p "You are about to configure aws-cli on your computer if you stuff this up just run aws-configure and enter the correct details. 
+It will ask for region and output format.
+ region: ap-southeast-2
+ output format: json | press any key to continue"
+
+ while true; do
+  read -p "You are about to configure aws-cli on your computer if you stuff this up just run aws-configure and enter the correct details. 
+    It will ask for region and output format.
+    region: ap-southeast-2
+    output format: json | type proceed and press enter to continue" user_input
+  
+  # Convert user input to lowercase for case-insensitive comparison
+  user_input_lc=$(echo "$user_input" | tr '[:upper:]' '[:lower:]')
+  if [ "$user_input_lc" == "proceed" ]; then
+    echo "Continuing..."
+    break
+  elif [ "$user_input_lc" == "exit" ]; then
+    echo "Exiting..."
+    exit 1
+  else
+    echo "Invalid input. Please type 'proceed' or 'exit'."
+  fi
+done
 
 aws configure
 
-sudo apt install -y swarmfarm-swarmbot-ssh-client
-
-sudo apt install -y swarmfarm-auth-login
-
-sudo apt install -y swarmfarm-attachment-aliases
-
-sudo apt install -y swarmfarm-can-log-tools
 
 
 

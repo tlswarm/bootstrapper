@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sudo apt install -y swarmfarm-swarmbot-ssh-client
+
+sudo apt install -y swarmfarm-auth-login
+
+sudo apt install -y swarmfarm-attachment-aliases
+
+sudo apt install -y swarmfarm-can-log-tools
+
+sudo apt install -y swarmfarm-route-analyser
