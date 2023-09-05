@@ -12,13 +12,12 @@ chmod 600 "$ubuntu_ssh_folder/id_ed25519"
 
   touch ~/.ssh/config
 
-  sleep 1  # Add a 1-second delay
+  
   if ! grep -Fxq "ControlMaster auto" ~/.ssh/config; then
     echo "ControlMaster auto" >> ~/.ssh/config
   fi
 
-  sleep 1  # Add a 1-second delay
-
+  
   if ! grep -Fxq "ControlPath ~/.ssh/%r@%h:%p" ~/.ssh/config; then
     echo "ControlPath ~/.ssh/%r@%h:%p" >> ~/.ssh/config
   fi
