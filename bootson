@@ -2,13 +2,13 @@
 
 # Display the instructions
 echo "This script helps you set up your WSL environment in a standard way for success."
-echo "DO NOT type 'proceed' and press Enter unless you are confident in each step you may leave this script running while you complete any incomplete steps
-just dont skip any or do them out of order."
+echo "DO NOT type 'proceed' and press Enter unless you are confident in each step you may
+ leave this script running while you complete any incomplete steps just dont skip any or
+  do them out of order."
 read -p "Are you ready to proceed or do you want to quit? (proceed/exit): " user_input
 
 ./apt-s3
 ./tools
 ./ros
-./github
 
 cd /tmp/ && git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && cd && sudo /tmp/robohustler/ && rm -r /tmp/bootstrapper/ 

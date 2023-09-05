@@ -2,8 +2,22 @@
 
 # Prompt the user to type "proceed" or "exit"
 while true; do
-  read -p "ONLY PROCEED if you have your Access Key ID, Secret Access Key - you will have to get these from a swarmfarm aws admin.
-   Type proceed and press enter to continue: " user_input
+  read -p "ONLY PROCEED if you have your 
+
+  Access Key ID
+  Secret Access Key
+
+  It will ask for region and output format find them below.
+ -------------------------
+ | region: ap-southeast-2|
+ | output format: json   |
+ -------------------------
+
+  If you stuff this up just run aws configure and enter the correct details. 
+
+  You will have to get these from a swarmfarm aws admin.
+  -----------------------------------------
+  Type proceed and press enter to continue: " user_input
   # Convert user input to lowercase for case-insensitive comparison
   user_input_lc=$(echo "$user_input" | tr '[:upper:]' '[:lower:]')
   if [ "$user_input_lc" == "proceed" ]; then
@@ -22,33 +36,7 @@ done
     echo "deb https://apt.swarmfarm.com focal main" | sudo tee /etc/apt/sources.list.d/swarmfarm.list
     curl https://apt.swarmfarm.com/pubkey.gpg | sudo apt-key add -
     sudo apt update
-    sudo apt install -y awscli
-
-read -p "You are about to configure aws-cli on your computer if you stuff this up just run aws-configure and enter the correct details. 
-It will ask for region and output format.
- region: ap-southeast-2
- output format: json | press any key to continue"
-
- while true; do
-  read -p "You are about to configure aws-cli on your computer if you stuff this up just run aws-configure and enter the correct details. 
-    It will ask for region and output format.
-    region: ap-southeast-2
-    output format: json | type proceed and press enter to continue" user_input
-  
-  # Convert user input to lowercase for case-insensitive comparison
-  user_input_lc=$(echo "$user_input" | tr '[:upper:]' '[:lower:]')
-  if [ "$user_input_lc" == "proceed" ]; then
-    echo "Continuing..."
-    break
-  elif [ "$user_input_lc" == "exit" ]; then
-    echo "Exiting..."
-    exit 1
-  else
-    echo "Invalid input. Please type 'proceed' or 'exit'."
-  fi
-done
-
-aws configure
+    sudo apt install -y awscli && aws configure
 
 
 
