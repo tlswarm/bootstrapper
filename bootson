@@ -29,7 +29,7 @@ if [ -d "/tmp/robohustler/" ]; then
         sudo rm -r "/tmp/robohustler/"
     fi
 
-cd /tmp/ && git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb  
+cd /tmp/ && git clone git@github.com:tlswarm/robohustler.git && sudo dpkg -i /tmp/robohustler/robohustler.deb && 
 
 if [ -d "/tmp/robohustler/" ]; then
         sudo rm -r "/tmp/robohustler/"
